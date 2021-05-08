@@ -23,3 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 components-props/node_modules/
 stats-ciclo/node_modules/
+rederizacao-condicional/node_modules/
