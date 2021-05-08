@@ -6,7 +6,6 @@ class Increment extends React.Component {
         this.state = {
             numb: 0
         }
-        this.incrementNumb = this.incrementNumb.bind(this)
     }
 
     incrementNumb () {
@@ -21,7 +20,7 @@ class Increment extends React.Component {
         return (
             <div>
                 <h1>Número: {this.state.numb}</h1>
-                <button onClick={this.incrementNumb} >Adicionar mais 1</button>
+                <button onClick={() => this.incrementNumb()} >Adicionar mais 1</button>
             </div>
         )
     }
