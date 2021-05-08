@@ -1,0 +1,42 @@
+.navigation {
+    background-color: #20232a;
+    display: flex;
+    padding: 1rem 4rem;
+    font-size: 20px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    margin-left: 2rem;
+    
+}
+
+.logo {
+    display: flex;
+    margin-right: 4rem;
+    color: #61dafb;
+    align-items: center;
+}
+
+img {
+    margin-right: 0.5rem;
+}
+
+.inputBuscar {
+    background: transparent;
+    border: 0;
+    color: #ffffff;
+    margin-left: 2rem;
+    font-size: 18px;
+}
+
+form {
+    width: auto;
+}
+
+a:hover {
+    color: #61dafb;
+}
+
+
