@@ -73,15 +73,29 @@ class ProductTable extends React.Component {
 }
 
 class SearchBar extends React.Component {
+    constructor(props){
+        super(props)
+        this.handleFilterTextChange = this.handleFilterTextChange.bind(this)
+        this.handleInStockOnlyChange = this.handleInStockOnlyChange.bind(this)
+    }
+
+    handleFilterTextChange(e) {
+        this.props.onFilterTextChange(e.target.value)
+    }
+
+    handleInStockOnlyChange(e) {
+        this.props.onInStockOnlyChange(e.target.checked)
+    }
+
     render() {
         const filterText = this.props.filterText
         const inStockOnly = this.props.inStockOnly
 
         return (
             <form>
-                <input type='text' placeholder='Procurar...' value={filterText} />
+                <input type='text' placeholder='Procurar...' value={filterText} onChange={this.handleFilterTextChange} />
                 <p>
-                    <input type='checkbox' checked={inStockOnly} />
+                    <input type='checkbox' checked={inStockOnly} onChange={this.handleInStockOnlyChange} />
                     {''}
                     Mostrar apenas produtos em estoque
                 </p>
@@ -97,6 +111,21 @@ class FilterableProductTable extends React.Component {
             filterText: '',
             inStockOnly: false
         }
+
+        this.handleFilterTextChange = this.handleFilterTextChange.bind(this)
+        this.handleInStockOnlyChange = this.handleInStockOnlyChange.bind(this)
+    }
+
+    handleFilterTextChange(filterText) {
+        this.setState({
+            filterText: filterText
+        })
+    }
+
+    handleInStockOnlyChange(inStockOnly) {
+        this.setState({
+            inStockOnly: inStockOnly
+        })
     }
 
 
@@ -106,6 +135,8 @@ class FilterableProductTable extends React.Component {
                 <SearchBar 
                 filterText = {this.state.filterText} //passando o state como uma prop
                 inStockOnly = {this.state.inStockOnly}
+                onFilterTextChange = {this.handleFilterTextChange}
+                onInStockOnlyChange = {this.handleInStockOnlyChange}
                 />
                 <ProductTable  
                 filterText = {this.state.filterText}
