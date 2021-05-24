@@ -34,7 +34,16 @@ class ProductTable extends React.Component {
         const rows = []
         let lastCategory = null
 
+        const filterText = this.props.filterText
+        const inStockOnly = this.props.inStockOnly
+
         this.props.products.forEach((product) => {
+            if(product.name.indexOf(filterText) === -1) {
+                return
+            }
+            if (inStockOnly && !product.stocked) {
+                return
+            }
             if(product.category !== lastCategory) {
                 rows.push(
                     <ProductCategoryRow 
@@ -65,11 +74,14 @@ class ProductTable extends React.Component {
 
 class SearchBar extends React.Component {
     render() {
+        const filterText = this.props.filterText
+        const inStockOnly = this.props.inStockOnly
+
         return (
             <form>
-                <input type='text' placeholder='Procurar...' />
+                <input type='text' placeholder='Procurar...' value={filterText} />
                 <p>
-                    <input type='checkbox' />
+                    <input type='checkbox' checked={inStockOnly} />
                     {''}
                     Mostrar apenas produtos em estoque
                 </p>
@@ -79,12 +91,26 @@ class SearchBar extends React.Component {
 }
 
 class FilterableProductTable extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            filterText: '',
+            inStockOnly: false
+        }
+    }
+
 
     render() {
         return (
             <div>
-                <SearchBar />
-                <ProductTable  products={this.props.products}/>
+                <SearchBar 
+                filterText = {this.state.filterText} //passando o state como uma prop
+                inStockOnly = {this.state.inStockOnly}
+                />
+                <ProductTable  
+                filterText = {this.state.filterText}
+                inStockOnly = {this.state.inStockOnly}
+                products={this.props.products}/>
             </div>
         )
     }
